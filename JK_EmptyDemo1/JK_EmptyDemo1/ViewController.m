@@ -17,14 +17,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    { self.table.jk_EmptyView = [JK_EmptyView createEmpty:^UIView *{
-        UIView * view=[[UIView alloc]initWithFrame:self.table.bounds];
-        view.backgroundColor = [UIColor redColor];
-        return view;
-    }];}
-    return;
+    
+    self.table.tableFooterView = [UIView new];
+//    { self.table.jk_EmptyView = [JK_EmptyView createEmpty:^UIView *{
+//        UIView * view=[[UIView alloc]initWithFrame:self.table.bounds];
+//        view.backgroundColor = [UIColor redColor];
+//        return view;
+//    }];}
+//    return;
     {//or
-        self.table.jk_EmptyView = [JK_EmptyView createNormelEmptyViewWith:@"hehe" title:@""];
+        self.table.jk_EmptyView = [JK_EmptyView createNormelEmptyViewWith:@"empty" title:@"hehehhe"];
 
     }
     
