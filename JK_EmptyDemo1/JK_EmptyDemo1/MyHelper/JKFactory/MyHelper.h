@@ -40,22 +40,7 @@
 #undef NSLog
 #define NSLog(args, ...)
 #endif
-//44是一个特殊的常量，默认行高和NavigationBar的高度为44
-#define Default 44
-//距离左边边距为10
-#define LeftDistance 10
-//控件间的距离
-#define ControlDistance 20
-//获取屏幕大小
-#define Screen [UIScreen mainScreen].bounds
-//获取屏幕大小
-#define ScreenSize [UIScreen mainScreen].bounds.size
-//获取屏幕的宽度
-#define ScreenWidth [UIScreen mainScreen].bounds.size.width
-//获取屏幕的高度
-#define ScreenHeight [UIScreen mainScreen].bounds.size.height
-// 操作系统版本号
-#define IOS_VERSION ([[[UIDevice currentDevice] systemVersion] floatValue])
+
 
 // 是否横竖屏
 // 用户界面横屏了才会返回YES
@@ -112,30 +97,13 @@
 
 #define iphone6Plus_5_5 ([UIScreen mainScreen].bounds.size.height==736.0f || [UIScreen mainScreen].bounds.size.height==414.0f)
 
-/*//图片宏
- #define Image(str) [UIImage imageNamed:str]
- //取图宏
- #define ImageForPath(name,type) [UIImage imageWithContentsOfFile:[[NSBundle mainBundle] pathForResource:name ofType:type]]*/
+
 /**
  度数
  */
 #define angle(d) ((M_PI / 180.0f) * d)//1弧度＝180°/π （≈57.3°） 度＝弧度×180°/π 360°＝360×π/180 ＝2π 弧度
-/**
- //程序是否打开过 如果打开过 就不是 第一次打开了
- BOOL isOpen = [[NSUserDefaults standardUserDefaults] boolForKey:kIsOpen];
- if (!isOpen) {
- //第一次打开
- self.window.rootViewController = [[BeginOpenViewController alloc] init];
- }else {
- self.window.rootViewController = [[PicketKitchenTabBarController alloc] init];
- }
- //记录打开过
- [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kIsOpen];
- //            //获取window
- //            //UIWindow *window = self.tabBarController.view;
- //            UIWindow *window = [[UIApplication sharedApplication] keyWindow];
- 
- */
+
+
 //不为nil或[NSNull null]时，为YES，不适合用于判断字符串是否为空
 #define NotNilAndNull(_ref)  (((_ref) != nil) && (![(_ref) isEqual:[NSNull null]]))
 //为nil或[NSNull null]时，为YES，不适合用于判断字符串是否为空
@@ -146,17 +114,6 @@
 #define IsStrNotEmpty(_ref)    (((_ref) != nil) && (![(_ref) isEqual:[NSNull null]]) && (![(_ref)isEqualToString:@""]))
 //数组是否为空
 #define IsArrEmpty(_ref)    (((_ref) == nil) || ([(_ref) isEqual:[NSNull null]]) ||([(_ref) count] == 0))
-
-#define kIsOpen @"isOpen"//是否打开过
-#define canEvaluatePolicys @"canEvaluatePolicys"//是否支持指纹
-#define AccountNumber @"AccountNumber"//账号
-#define UserPassword @"UserPassword"
-
-#define CoreLockPWDKey  @"CoreLockPWDKey"//手势密码
-
-#define isSwitch @"isSwitch"//手势密码开关
-#define isEvaluateID @"isEvaluateID"//是否启用指纹
-
 
 
 #endif /* MyHelper_h */
