@@ -189,37 +189,20 @@ Class jk_baseClassToSwizzleForTarget(id target)
 {
     if ([self jk_itemsCount]==0) {
         
-//            if ([self isKindOfClass:[UICollectionView class]]) {
-//
-//                UICollectionView* collection= (UICollectionView*)self;
-//
-//                [collection insertSubview:self.jk_EmptyView atIndex:0];
-//
-//            }else if([self isKindOfClass:[UITableView class]]){
-//                UITableView* table=(UITableView*)self;
-////                [table.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-////                    if ([obj isKindOfClass:NSClassFromString(@"UITableViewWrapperView")]) {
-////                        [obj insertSubview:self.jk_EmptyView atIndex:0];
-////                    }
-////                }];
-//
-//            }else{
-//                UIScrollView* scroll=(UIScrollView*)self;
-//                [scroll insertSubview:self.jk_EmptyView atIndex:0];
-//            }
- [self insertSubview:self.jk_EmptyView atIndex:0];
+        [self insertSubview:self.jk_EmptyView atIndex:0];
         
     }else{
         if (self.jk_EmptyView) {
+            
             [self.jk_EmptyView removeFromSuperview];
             
         }
     }
-    
 }
 
 
 @end
+
 @implementation JK_EmptyView
 
 +(UIView *)createEmpty:(UIView *(^)(void))block{
@@ -229,8 +212,8 @@ Class jk_baseClassToSwizzleForTarget(id target)
         return nil;
     }
 }
-+(UIView*)createNormelEmptyViewWith:(NSString*)imageName title:(NSString*)title{
-    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, ScreenWidth, ScreenHeight-64-50)];
++(UIView*)createNormelEmptyViewWith:(NSString*)imageName title:(NSString*)title {
+    UIView* view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height-64-50)];
     UIImage* image=[UIImage imageNamed:imageName];
     CGSize size=image.size;
     UIImageView* imageView=[[UIImageView alloc]initWithImage:[UIImage imageNamed:imageName]];
@@ -244,15 +227,21 @@ Class jk_baseClassToSwizzleForTarget(id target)
     UILabel* lab=[[UILabel alloc]init];
     lab.text= title;
     lab.textAlignment= NSTextAlignmentCenter;
-    [lab setFont:UIFontPFSCForSize(14)];
+    [lab setFont:[UIFont systemFontOfSize:14]];
     lab.textColor=[UIColor lightGrayColor];
     [view addSubview:lab];
-    CGFloat height=[Factory textHeightFromTextString:title width:ScreenWidth fontSize:14];
+    CGFloat height=[JK_EmptyView textHeightFromTextString:title width:[[UIScreen mainScreen] bounds].size.width fontSize:14];
     lab.frame= CGRectMake(0, imageView.bottom+30, view.width, height);
     
     
     return view;
 }
-
++ (CGFloat)textHeightFromTextString:(NSString *)text width:(CGFloat)textWidth fontSize:(CGFloat)size{
+    
+    NSDictionary *dict = @{NSFontAttributeName:[UIFont systemFontOfSize:size]};
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesFontLeading|NSStringDrawingUsesLineFragmentOrigin attributes:dict context:nil];
+    //返回计算出的行高
+    return rect.size.height;
+}
 @end
 
