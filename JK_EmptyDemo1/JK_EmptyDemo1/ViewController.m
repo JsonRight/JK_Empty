@@ -27,6 +27,12 @@
 //    return;
     {//or
         self.table.jk_EmptyView = [JK_EmptyView createNormelEmptyViewWith:@"empty" title:@"hehehhe"];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.table.jk_EmptyView = nil;
+        });
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            self.table.jk_EmptyView =  [JK_EmptyView createNormelEmptyViewWith:@"empty" title:@"xixixix"];
+        });
 
     }
     
